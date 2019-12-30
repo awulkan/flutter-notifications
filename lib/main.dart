@@ -11,7 +11,8 @@ Future onSelectNotification(String payload) async {
   print(payload);
 }
 
-Future<void> onDidReceiveLocalNotification(int id, String title, String body, String payload) async {
+Future<void> onDidReceiveLocalNotification(
+    int id, String title, String body, String payload) async {
   print(payload);
 }
 
@@ -46,87 +47,73 @@ class MyApp extends StatelessWidget {
 Future<void> instantNotification() async {
   print('Notifying');
   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-    'your channel id', 'your channel name', 'your channel description',
-    importance: Importance.Max,
-    priority: Priority.High,
-    ticker: 'ticker',
-    icon: 'app_icon'
-  );
+      'your channel id', 'your channel name', 'your channel description',
+      importance: Importance.Max,
+      priority: Priority.High,
+      ticker: 'ticker',
+      icon: 'app_icon');
   var iOSPlatformChannelSpecifics = IOSNotificationDetails();
   var platformChannelSpecifics = NotificationDetails(
-    androidPlatformChannelSpecifics,
-    iOSPlatformChannelSpecifics
-  );
+      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
   await flutterLocalNotificationsPlugin.show(
-    0,
-    'Example title',
-    'Notification body text',
-    platformChannelSpecifics,
-    payload: 'item x'
-  );
+      0, 'Example title', 'Notification body text', platformChannelSpecifics,
+      payload: 'item x');
 }
 
 Future<void> scheduleDailyNotification() async {
   print('Scheduling daily');
-  Time time = new Time(17, 22, 0);
+  Time time = Time(22, 10, 0);
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-    'repeatDailyAtTime channel id',
-    'repeatDailyAtTime channel name',
-    'repeatDailyAtTime description',
-    importance: Importance.Max,
-    priority: Priority.High,
-    icon: 'app_icon'
-  );
+      'repeatDailyAtTime channel id',
+      'repeatDailyAtTime channel name',
+      'repeatDailyAtTime description',
+      importance: Importance.Max,
+      priority: Priority.High,
+      icon: 'app_icon');
   var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
   var platformChannelSpecifics = new NotificationDetails(
-    androidPlatformChannelSpecifics,
-    iOSPlatformChannelSpecifics
-  );
-  await flutterLocalNotificationsPlugin.showDailyAtTime(
-    0,
-    'Daily title',
-    'Daily notification body',
-    time,
-    platformChannelSpecifics
-  );
+      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+  flutterLocalNotificationsPlugin.showDailyAtTime(
+      25,
+      'Daily title',
+      'Daily notification body for ${time.hour}:${time.minute}:${time.second}',
+      time,
+      platformChannelSpecifics);
 }
 
 Future<void> scheduleFutureNotification() async {
   print('Scheduling 5 seconds');
-  var scheduledNotificationDateTime = new DateTime.now().add(new Duration(seconds: 5));
+  var scheduledNotificationDateTime =
+      new DateTime.now().add(new Duration(seconds: 5));
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-    'your other channel id',
-    'your other channel name',
-    'your other channel description');
+      'your other channel id',
+      'your other channel name',
+      'your other channel description',
+      importance: Importance.Max,
+      priority: Priority.High,
+      icon: 'app_icon');
   var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
   NotificationDetails platformChannelSpecifics = new NotificationDetails(
-    androidPlatformChannelSpecifics,
-    iOSPlatformChannelSpecifics);
+      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
   await flutterLocalNotificationsPlugin.schedule(
-    0,
-    'scheduled title',
-    'scheduled body',
-    scheduledNotificationDateTime,
-    platformChannelSpecifics);
+      2,
+      'scheduled title',
+      'scheduled body',
+      scheduledNotificationDateTime,
+      platformChannelSpecifics);
 }
 
 Future<void> repeatNotification() async {
   print('Repeat every minute');
   // Show a notification every minute with the first appearance happening a minute after invoking the method
-  var androidPlatformChannelSpecifics =
-      new AndroidNotificationDetails(
-        'repeating channel id',
-        'repeating channel name',
-        'repeating description');
+  var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+      'repeating channel id', 'repeating channel name', 'repeating description',
+      importance: Importance.Max, priority: Priority.High, icon: 'app_icon');
   var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
   var platformChannelSpecifics = new NotificationDetails(
       androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-  await flutterLocalNotificationsPlugin.periodicallyShow(
-    0,
-    'repeating title',
-    'repeating body',
-    RepeatInterval.EveryMinute,
-    platformChannelSpecifics);
+  await flutterLocalNotificationsPlugin.periodicallyShow(5, 'repeating title',
+      'repeating body', RepeatInterval.EveryMinute, platformChannelSpecifics);
 }
 
 class MyHomePage extends StatefulWidget {
