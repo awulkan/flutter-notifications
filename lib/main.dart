@@ -11,52 +11,8 @@ Future onSelectNotification(String payload) async {
   print(payload);
 }
 
-// Streams are created so that app can respond to notification-related events since the plugin is initialised in the `main` function
-// final BehaviorSubject<ReceivedNotification> didReceiveLocalNotificationSubject =
-//     BehaviorSubject<ReceivedNotification>();
-
-// final BehaviorSubject<String> selectNotificationSubject =
-//     BehaviorSubject<String>();
-
-// class ReceivedNotification {
-//   final int id;
-//   final String title;
-//   final String body;
-//   final String payload;
-
-//   ReceivedNotification(
-//       {@required this.id,
-//       @required this.title,
-//       @required this.body,
-//       @required this.payload});
-// }
-
-Future<void> onDidReceiveLocalNotification(
-    int id, String title, String body, String payload) async {
+Future<void> onDidReceiveLocalNotification(int id, String title, String body, String payload) async {
   print(payload);
-  // display a dialog with the notification details, tap ok to go to another page
-  // await showDialog(
-  //   context: context,
-  //   builder: (BuildContext context) => CupertinoAlertDialog(
-  //     title: title != null ? Text(title) : null,
-  //     content: body != null ? Text(body) : null,
-  //     actions: [
-  //       CupertinoDialogAction(
-  //         isDefaultAction: true,
-  //         child: Text('Ok'),
-  //         onPressed: () async {
-  //           Navigator.of(context, rootNavigator: true).pop();
-  //           await Navigator.push(
-  //             context,
-  //             MaterialPageRoute(
-  //               builder: (context) => SecondScreen(payload),
-  //             ),
-  //           );
-  //         },
-  //       )
-  //     ],
-  //   ),
-  // );
 }
 
 void main() async {
